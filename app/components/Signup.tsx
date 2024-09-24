@@ -1,9 +1,9 @@
 
 "use client"
 
-import axios from "axios";
 import { ChangeEventHandler, useState } from "react";
 import { useRouter } from "next/navigation";
+import { signupserver } from "../actions/user";
 
 export function Signup() {
     const [username, setUsername] = useState("");
@@ -27,11 +27,8 @@ export function Signup() {
                             setPassword(e.target.value)
                         }} label="Password" type={"password"} placeholder="123456" />
                         <button onClick={async () => {
-                            await axios.post("http://localhost:3000/api/user" , {
-                                username,
-                                password
-                            });
-                            router.push("/"); //this means after clicking the user gets directed to the home page for use / is the home page here
+                            await signupserver(username,password); //sends out http req to the server action
+                            //router.push("/"); //this means after clicking the user gets directed to the home page for use / is the home page here
                         }} type="button" className="mt-8 w-full text-white bg-gray-800 focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2">Sign in</button>
                     </div>
                 </div>
